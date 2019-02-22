@@ -15,7 +15,7 @@
           <a :href="'mailto:' + contacts.email">{{ contacts.email }}</a>
         </p>
         <p class="website">
-          <a :href="'http://' + contacts.website">{{ contacts.website }}</a>
+          <a :href="'https://' + contacts.website" target="_blank">{{ contacts.website }}</a>
         </p>
       </div>
     </div>
@@ -38,7 +38,7 @@ export default {
         address: '浙江省 杭州市 ××区 □□街道',
         mobile: '188-1234-5678',
         email: 'abc123qwer87@163.com',
-        website: 'eeewl1250.gitee.io/eleme'
+        website: 'github.com/eeewl1250'
       }
     }
   }

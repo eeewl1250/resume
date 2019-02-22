@@ -204,7 +204,7 @@ export default {
       mw = mh * (375 / 667)
       /* PC端项目图尺寸 */
       pw = 70vw
-      ph = pw * (905 / 1912)
+      ph = pw * (905 / 1920)
       .pic-nav
         position: relative
         margin-top: -3vh
@@ -239,8 +239,11 @@ export default {
           position: absolute
           left: 0
           top: 0
-          width: 100%
+          width: calc(100% - 2px)
           cursor: zoom-in
+          border: 1px solid #aaa
+          img
+            display: block
           &.change-pic-enter
             opacity: 0
             top: 20vh
@@ -391,4 +394,19 @@ export default {
         .controls
           &.pc-pic
             top: "calc(50% + %s / 2 + 15px)" % ph
+
+@media only screen and (max-aspect-ratio: 1/1)
+  .project-detail
+    .gallery
+      .gallery-content
+        pw = 100vw
+        ph = pw * (905 / 1912)
+        .display
+          &.display-pc
+            width: pw
+            height: ph
+            margin-top: (- ph / 2)
+        .controls
+          &.pc-pic
+            top: "calc(50% + %s / 2 + 30px)" % ph
 </style>
