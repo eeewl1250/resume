@@ -284,11 +284,10 @@ export default {
     .tab
       position: absolute
       bottom: 10vh
-      display: flex
-      justify-content: center
       margin: 3vh auto 0
       width: 100vw
       .item
+        display: inline-block
         margin: 0 10px
         width: 20px
         height: 20px
