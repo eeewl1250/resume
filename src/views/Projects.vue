@@ -70,7 +70,6 @@ export default {
   margin-top: 15vh
   .project-overview
     margin: 0 auto
-    /*padding-top: 4vh*/
     width: 64vw
     height: (85 - 14)vh
     text-align: left

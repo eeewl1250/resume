@@ -5,25 +5,34 @@
        @touchend="touchEnd"
   >
     <transition-group :name="menuSlide" tag="div" class="main">
-      <projects :projects="projects"
+      <projects :projects="resumeData.projects"
                 key="projects"
                 :slideIn="slideIn"
                 v-if="selectedMenu===0"
                 @show-project="showProject"
       ></projects>
-      <introduction key="introduction" v-if="selectedMenu===1"></introduction>
-      <experience :experiences="experiences"
+      <introduction :intro="resumeData.intro"
+                    key="introduction"
+                    v-if="selectedMenu===1"
+      ></introduction>
+      <experience :experiences="resumeData.experiences"
                   key="experience"
                   v-if="selectedMenu===2"
                   @overheight="overHeight"
       ></experience>
-      <contact key="contact" v-if="selectedMenu===3"></contact>
+      <contact :contacts="resumeData.contacts"
+               key="contact"
+               v-if="selectedMenu===3"
+      ></contact>
     </transition-group>
     <div class="sidebar">
-      <span class="text">{{ menu[selectedMenu].eng.toUpperCase() }}</span>
+      <span class="text">{{ resumeData.menu[selectedMenu].eng.toUpperCase() }}</span>
     </div>
-    <v-header :state="state" @go-to-page="goToPage"></v-header>
-    <project :projects="projects"
+    <v-header :state="state"
+              :menu="resumeData.menu"
+              @go-to-page="goToPage"
+    ></v-header>
+    <project :projects="resumeData.projects"
              :isProjectShowed="isProjectShowed"
              :project-index="projectIndex"
              @hide-project="hideProject"
@@ -63,173 +72,192 @@ export default {
     return {
       state: false,
       slideIn: false,
-      menu: [
-        {
-          chi: '项目',
-          eng: 'PROJECTS'
-        },
-        {
-          chi: '介绍',
-          eng: 'INTRODUCTION'
-        },
-        {
-          chi: '经历',
-          eng: 'EXPERIENCE'
-        },
-        {
-          chi: '联系',
-          eng: 'CONTACT'
-        }
-      ],
       selectedMenu: 0,
       isScrolled: false,
       isHeightOverflow: false,
       menuSlide: 'slide-up',
-      projects: [
-        {
-          title: '项目一',
-          img: cover1,
-          pics: {
-            mobile: [
-              {
-                id: '8d12c0e8-e6ab-55ac-9692-a993757e63b7',
-                pic: rsm00
-              },
-              {
-                id: '9d12c0e8-e6ab-55ac-9692-a993757e63b7',
-                pic: rsm01
-              },
-              {
-                id: '1d12c0e8-e6ab-55ac-9692-a993757e63b7',
-                pic: rsm02
-              },
-              {
-                id: '5818d3be-49e4-5ff6-9b78-858d5cd267a6',
-                pic: rsm03
-              },
-              {
-                id: '909dd909-cc8b-50f3-815d-8c65b0f61fe4',
-                pic: rsm04
-              },
-              {
-                id: '909dd979-cc8b-50f3-815d-8c65b0f61fe4',
-                pic: rsm05
-              }
-            ],
-            pc: [
-              {
-                id: '3b35498f-f876-546a-a218-37080d25e611',
-                pic: rs00
-              },
-              {
-                id: '3b85498f-f876-546a-a218-37080d25e611',
-                pic: rs01
-              },
-              {
-                id: '4b35498f-f876-546a-a218-37080d25e611',
-                pic: rs02
-              },
-              {
-                id: '5b35498f-f876-546a-a218-37080d25e611',
-                pic: rs03
-              },
-              {
-                id: '6b35498f-f876-546a-a218-37080d25e611',
-                pic: rs04
-              },
-              {
-                id: '6b36498f-f876-546a-a218-37080d25e611',
-                pic: rs05
-              }
-            ]
-          },
-          info: {
-            demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
-            github: 'https://github.com/eeewl1250/elm-vue'
-          }
-        },
-        {
-          title: '这是项目二二二二',
-          img: cover2,
-          pics: {
-            pc: [
-              {
-                id: '3b35498f-f876-546a-a218-37080d25e611',
-                pic: rs01
-              },
-              {
-                id: '0f20edd8-4776-5d33-8d1f-78b91b551e29',
-                pic: rs02
-              },
-              {
-                id: 'b6cd74b0-f1ee-53fa-a54f-be408ec6e7d3',
-                pic: rs03
-              },
-              {
-                id: '0da82b52-89e2-5c7c-b894-3609d415bc62',
-                pic: rs04
-              }
-            ]
-          },
-          info: {
-            demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
-            github: 'https://github.com/eeewl1250/elm-vue'
-          }
-        },
-        {
-          title: '项目三在此',
-          img: cover3,
-          pics: {
-            mobile: [
-              {
-                id: '8d12c0e8-e6ab-55ac-9692-a993757e63b7',
-                pic: rsm01
-              },
-              {
-                id: '5818d3be-49e4-5ff6-9b78-858d5cd267a6',
-                pic: rsm02
-              },
-              {
-                id: '909dd909-cc8b-50f3-815d-8c65b0f61fe4',
-                pic: rsm03
-              },
-              {
-                id: 'cfcd5e9a-d561-5cd5-a825-7380613dfbc4',
-                pic: rsm04
-              }
-            ]
-          },
-          info: {
-            demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
-            github: 'https://github.com/eeewl1250/elm-vue'
-          }
-        }
-      ],
-      experiences: [
-        {
-          dateFrom: '2017-06',
-          dateTo: '2017-09',
-          title: 'xx公司实习',
-          desc: '使用HTML、Css、Bootstrap 编写页面，通过优雅降级，处理各种浏览器兼容性问题。\n使用javascript实现页面中需要效果。'
-        },
-        {
-          dateFrom: '2017-12',
-          dateTo: '2018-03',
-          title: 'xx公司实习',
-          desc: '负责公司现有项目和新项目的前端修改调试和开发工作。\n与设计团队、后端开发团队紧密配合，确保软件实施、优化网站前端性能。'
-        },
-        {
-          dateFrom: '2018-06',
-          dateTo: '2018-09',
-          title: 'xx公司实习',
-          desc: '负责符合W3C标准、多浏览器兼容、语义化的Web前端网页产品功能的开发，调试和维护，实现一流的用户交互界面。'
-        }
-      ],
       isProjectShowed: false,
       projectIndex: -1,
       bodyHeight: document.body.clientHeight,
       resizeTimer: false,
-      touchY: 0
+      touchY: 0,
+      resumeData: {
+        menu: [
+          {
+            chi: '项目',
+            eng: 'PROJECTS'
+          },
+          {
+            chi: '介绍',
+            eng: 'INTRODUCTION'
+          },
+          {
+            chi: '经历',
+            eng: 'EXPERIENCE'
+          },
+          {
+            chi: '联系',
+            eng: 'CONTACT'
+          }
+        ],
+        projects: [
+          {
+            title: '项目一',
+            img: cover1,
+            pics: {
+              mobile: [
+                {
+                  id: '8d12c0e8-e6ab-55ac-9692-a993757e63b7',
+                  pic: rsm00
+                },
+                {
+                  id: '9d12c0e8-e6ab-55ac-9692-a993757e63b7',
+                  pic: rsm01
+                },
+                {
+                  id: '1d12c0e8-e6ab-55ac-9692-a993757e63b7',
+                  pic: rsm02
+                },
+                {
+                  id: '5818d3be-49e4-5ff6-9b78-858d5cd267a6',
+                  pic: rsm03
+                },
+                {
+                  id: '909dd909-cc8b-50f3-815d-8c65b0f61fe4',
+                  pic: rsm04
+                },
+                {
+                  id: '909dd979-cc8b-50f3-815d-8c65b0f61fe4',
+                  pic: rsm05
+                }
+              ],
+              pc: [
+                {
+                  id: '3b35498f-f876-546a-a218-37080d25e611',
+                  pic: rs00
+                },
+                {
+                  id: '3b85498f-f876-546a-a218-37080d25e611',
+                  pic: rs01
+                },
+                {
+                  id: '4b35498f-f876-546a-a218-37080d25e611',
+                  pic: rs02
+                },
+                {
+                  id: '5b35498f-f876-546a-a218-37080d25e611',
+                  pic: rs03
+                },
+                {
+                  id: '6b35498f-f876-546a-a218-37080d25e611',
+                  pic: rs04
+                },
+                {
+                  id: '6b36498f-f876-546a-a218-37080d25e611',
+                  pic: rs05
+                }
+              ]
+            },
+            info: {
+              demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
+              github: 'https://github.com/eeewl1250/elm-vue'
+            }
+          },
+          {
+            title: '这是项目二二二二',
+            img: cover2,
+            pics: {
+              pc: [
+                {
+                  id: '3b35498f-f876-546a-a218-37080d25e611',
+                  pic: rs01
+                },
+                {
+                  id: '0f20edd8-4776-5d33-8d1f-78b91b551e29',
+                  pic: rs02
+                },
+                {
+                  id: 'b6cd74b0-f1ee-53fa-a54f-be408ec6e7d3',
+                  pic: rs03
+                },
+                {
+                  id: '0da82b52-89e2-5c7c-b894-3609d415bc62',
+                  pic: rs04
+                }
+              ]
+            },
+            info: {
+              demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
+              github: 'https://github.com/eeewl1250/elm-vue'
+            }
+          },
+          {
+            title: '项目三在此',
+            img: cover3,
+            pics: {
+              mobile: [
+                {
+                  id: '8d12c0e8-e6ab-55ac-9692-a993757e63b7',
+                  pic: rsm01
+                },
+                {
+                  id: '5818d3be-49e4-5ff6-9b78-858d5cd267a6',
+                  pic: rsm02
+                },
+                {
+                  id: '909dd909-cc8b-50f3-815d-8c65b0f61fe4',
+                  pic: rsm03
+                },
+                {
+                  id: 'cfcd5e9a-d561-5cd5-a825-7380613dfbc4',
+                  pic: rsm04
+                }
+              ]
+            },
+            info: {
+              demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
+              github: 'https://github.com/eeewl1250/elm-vue'
+            }
+          }
+        ],
+        intro: {
+          name: '王大狗',
+          info: [
+            '某个省 某个市',
+            '有所大学 本科 哪个学院 一个系',
+            '英语四级 500 六级 500',
+            '校奖学金二等奖',
+            '院奖学金一等奖'
+          ]
+        },
+        experiences: [
+          {
+            dateFrom: '2017-06',
+            dateTo: '2017-09',
+            title: 'xx公司实习',
+            desc: '使用HTML、Css、Bootstrap 编写页面，通过优雅降级，处理各种浏览器兼容性问题。\n使用javascript实现页面中需要效果。'
+          },
+          {
+            dateFrom: '2017-12',
+            dateTo: '2018-03',
+            title: 'xx公司实习',
+            desc: '负责公司现有项目和新项目的前端修改调试和开发工作。\n与设计团队、后端开发团队紧密配合，确保软件实施、优化网站前端性能。'
+          },
+          {
+            dateFrom: '2018-06',
+            dateTo: '2018-09',
+            title: 'xx公司实习',
+            desc: '负责符合W3C标准、多浏览器兼容、语义化的Web前端网页产品功能的开发，调试和维护，实现一流的用户交互界面。'
+          }
+        ],
+        contacts: {
+          name: '王大狗',
+          address: '浙江省 杭州市 ××区 □□街道',
+          mobile: '188-1234-5678',
+          email: 'abc123qwer87@163.com',
+          website: 'github.com/eeewl1250'
+        }
+      }
     }
   },
   mounted () {
@@ -244,7 +272,6 @@ export default {
         if (!this.resizeTimer) {
           this.bodyHeight = document.body.clientHeight
 
-          console.log(this.bodyHeight)
           this.resizeTimer = true
           setTimeout(() => {
             this.resizeTimer = false
@@ -260,11 +287,6 @@ export default {
     experience,
     project,
     contact
-  },
-  watch: {
-    bodyHeight (val) {
-      console.log(val)
-    }
   },
   methods: {
     /* 移动端触摸事件 */
@@ -357,7 +379,7 @@ html
         transition: all 0.6s
       &:hover
         color: #999
-        transform: /*rotate(-90deg) */scaleX(1.3)
+        transform: scaleX(1.3)
         transition: all 0.6s
         &:after
           border-bottom-color: #999
@@ -366,7 +388,6 @@ html
           transition: all 0.6s
   .main
     position: fixed
-    /*top: 15vh*/
     top: 0
     bottom: 0
     left: 0

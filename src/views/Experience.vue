@@ -64,16 +64,15 @@ export default {
     // 检测内容是否超过容器的高度
     checkContentHeight () {
       const content = document.getElementsByClassName('experience-content')[0]
-      if (content.scrollHeight > content.clientHeight) {
-        this.$emit('overheight', true)
-        console.log('overheight')
-      } else {
-        this.$emit('overheight', false)
-      }
+      this.$emit('overheight', content.scrollHeight > content.clientHeight)
+      // if (content.scrollHeight > content.clientHeight) {
+      //   this.$emit('overheight', true)
+      // } else {
+      //   this.$emit('overheight', false)
+      // }
     },
     checkScrollEnd (e) {
       const el = e.target
-      //console.log(el.scrollTop, el.clientHeight, el.scrollHeight)
       if (el.scrollTop + el.clientHeight + 10 < el.scrollHeight) return
 
       // 交互友好：滚动到底部后，不立刻滚动到下一页
@@ -83,12 +82,10 @@ export default {
     },
     /* 移动端滚动 */
     touchStart (evt) {
-      const changedTouch = evt.changedTouches[0]
-      this.touchY = changedTouch.pageY
+      this.touchY = evt.changedTouches[0].pageY
     },
     touchEnd (evt) {
-      const changedTouch = evt.changedTouches[0]
-      const distanceY = changedTouch.pageY - this.touchY
+      const distanceY = evt.changedTouches[0].pageY - this.touchY
       evt.target.scrollTop = evt.target.scrollTop - distanceY
     }
   }

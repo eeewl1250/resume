@@ -28,19 +28,13 @@ import scrollDown from '@/components/scrollDown'
 
 export default {
   name: 'Contact',
+  props: {
+    contacts: {
+      type: Object
+    }
+  },
   components: {
     'scroll-down': scrollDown
-  },
-  data () {
-    return {
-      contacts: {
-        name: '王大狗',
-        address: '浙江省 杭州市 ××区 □□街道',
-        mobile: '188-1234-5678',
-        email: 'abc123qwer87@163.com',
-        website: 'github.com/eeewl1250'
-      }
-    }
   }
 }
 </script>

@@ -43,29 +43,14 @@ export default {
     state: {
       type: Boolean,
       default: false
+    },
+    menu: {
+      type: Array
     }
   },
   data () {
     return {
-      isMenuShowed: false,
-      menu: [
-        {
-          chi: '项目',
-          eng: 'PROJECTS'
-        },
-        {
-          chi: '介绍',
-          eng: 'INTRODUCTION'
-        },
-        {
-          chi: '经历',
-          eng: 'EXPERIENCE'
-        },
-        {
-          chi: '联系',
-          eng: 'CONTACT'
-        }
-      ]
+      isMenuShowed: false
     }
   },
   methods: {
@@ -88,7 +73,6 @@ export default {
   height: 9vh
   color: #333333
   text-align: center
-  /*background-color: #ffffff*/
   .title
     h1
       font-size: 16px
@@ -170,7 +154,6 @@ export default {
     overflow: hidden
     transform: translateZ(0)
     .menu
-      /*margin: 45vh auto*/
       margin: 10vh auto
       width: 94vw
       max-width: calc(112vh + 6vw)

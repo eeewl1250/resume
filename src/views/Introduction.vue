@@ -19,28 +19,13 @@ import scrollDown from '@/components/scrollDown'
 
 export default {
   name: 'Introduction',
+  props: {
+    intro: {
+      type: Object
+    }
+  },
   components: {
     'scroll-down': scrollDown
-  },
-  data () {
-    return {
-      intro: {
-        name: '王大狗',
-        info: [
-            '某个省 某个市',
-            '有所大学 本科 哪个学院 一个系',
-            '英语四级 500 六级 500',
-            '校奖学金二等奖',
-            '院奖学金一等奖'
-        ]
-      }
-    }
-  },
-  methods: {
-    /*首字母大写*/
-    upFirstLetter (str) {
-      return str[0].toUpperCase() + str.substring(1)
-    }
   }
 }
 </script>
@@ -51,10 +36,7 @@ export default {
   left: 0
   top: 0
   width: 100%
-  /*height: calc(85vh - 120px)*/
   height: 100vh
-  /*padding: 50px 0 70px*/
-  /*background-color: #696969*/
   .info, .avatar
     display: inline-block
     width: 50vw
@@ -68,7 +50,6 @@ export default {
       width: 10px
       font-size: 35px
       line-height: 100px
-      /*font-weight: 700*/
       font-family: '华文中宋', '华文宋体'
       color: #444
     .first-name
