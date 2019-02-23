@@ -55,7 +55,10 @@ export default {
     return {
       hoverItemIndex: -1,
       i: -1,
-      imgPath: '/static/img/'
+      imgPath: process.env.NODE_ENV === 'production'
+          ? '/resume/'
+          : '/'
+          + 'static/img/'
     }
   },
   methods: {

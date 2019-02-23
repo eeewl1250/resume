@@ -8,11 +8,11 @@
       </div>
     </div>
     <div class="avatar">
-      <img src="/static/img/avatar_320.jpg"
-           srcset="/static/img/avatar_320.jpg 320w,
-                   /static/img/avatar_480.jpg 480w,
-                   /static/img/avatar_640.jpg 640w,
-                   /static/img/avatar_700.jpg 700w"
+      <img :src="`${imgPath}avatar_320.jpg`"
+           :srcset="`${imgPath}avatar_320.jpg 320w,
+                     ${imgPath}avatar_480.jpg 480w,
+                     ${imgPath}avatar_640.jpg 640w,
+                     ${imgPath}avatar_700.jpg 700w`"
            sizes="(max-aspect-ratio: 1/1) calc(35vh * 700 / 906), 25vw"
       />
     </div>
@@ -28,6 +28,14 @@ export default {
   props: {
     intro: {
       type: Object
+    }
+  },
+  data () {
+    return {
+      imgPath: process.env.NODE_ENV === 'production'
+          ? '/resume/'
+          : '/'
+          + 'static/img/'
     }
   },
   components: {
