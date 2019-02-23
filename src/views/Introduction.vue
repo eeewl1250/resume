@@ -8,7 +8,13 @@
       </div>
     </div>
     <div class="avatar">
-      <img src="../assets/img/avatar.jpg" width="50%" />
+      <img src="/static/img/avatar_320.jpg"
+           srcset="/static/img/avatar_320.jpg 320w,
+                   /static/img/avatar_480.jpg 480w,
+                   /static/img/avatar_640.jpg 640w,
+                   /static/img/avatar_700.jpg 700w"
+           sizes="(max-aspect-ratio: 1/1) calc(35vh * 700 / 906), 25vw"
+      />
     </div>
     <scroll-down></scroll-down>
   </div>
@@ -104,7 +110,4 @@ export default {
       margin-top: -25vh
       background: none
       line-height: 35vh
-      img
-        height: 35vh
-        width: (35 * 700 / 906)vh
 </style>

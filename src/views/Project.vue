@@ -32,7 +32,13 @@
                :href="pic.pic"
                target="_blank"
             >
-              <img :src="pic.pic" width="100%"/>
+              <img :src="imgPath + pic.pic + '_480.jpg'"
+                   :srcset="imgPath + pic.pic + '_480.jpg 480w,'
+                          + imgPath + pic.pic + '_640.jpg 640w,'
+                          + imgPath + pic.pic + '_720.jpg 720w,'
+                          + imgPath + pic.pic + '_938.jpg 938w'"
+                   sizes="calc(70vh * 375 / 667 - 2px)"
+              />
             </a>
           </transition-group>
           <transition-group class="display-pc display"
@@ -46,7 +52,18 @@
                :href="pic.pic"
                target="_blank"
             >
-              <img :src="pic.pic" width="100%"/>
+              <img :src="imgPath + pic.pic + '_720.jpg'"
+                   :srcset="imgPath + pic.pic + '_720.jpg 720w,'
+                          + imgPath + pic.pic + '_960.jpg 960w,'
+                          + imgPath + pic.pic + '_1280.jpg 1280w,'
+                          + imgPath + pic.pic + '_1440.jpg 1440w,'
+                          + imgPath + pic.pic + '_1536.jpg 1536w,'
+                          + imgPath + pic.pic + '_1920.jpg 1920w'"
+                   sizes="(max-aspect-ratio: 1/1) calc(100vw - 2px),
+                          (min-aspect-ratio: 8/5) calc(60vw - 2px),
+                          (min-aspect-ratio: 12/5) calc(45vw - 2px),
+                          calc(70vw - 2px)"
+              />
             </a>
           </transition-group>
           <div class="controls" :class="{'pc-pic':!isMobilePicShowing}">
@@ -97,7 +114,8 @@ export default {
       picTypes: {
         MOBILE: 'mobile',
         PC: 'pc'
-      }
+      },
+      imgPath: '/static/img/'
     }
   },
   computed: {
@@ -187,7 +205,6 @@ export default {
     right: 0
     top: 0
     bottom: 0
-    /*padding: 10vh 0*/
     .title
       width: 100vw
       height: 10vh
@@ -204,7 +221,7 @@ export default {
       mw = mh * (375 / 667)
       /* PC端项目图尺寸 */
       pw = 70vw
-      ph = pw * (905 / 1920)
+      ph = pw * (1024 / 1536)
       .pic-nav
         position: relative
         margin-top: -3vh
@@ -369,7 +386,7 @@ export default {
     .gallery
       .gallery-content
         pw = 60vw
-        ph = pw * (905 / 1912)
+        ph = pw * (1024 / 1536)
         .display
           &.display-pc
             width: pw
@@ -384,7 +401,7 @@ export default {
     .gallery
       .gallery-content
         pw = 45vw
-        ph = pw * (905 / 1912)
+        ph = pw * (1024 / 1536)
         .display
           &.display-pc
             width: pw
@@ -399,7 +416,7 @@ export default {
     .gallery
       .gallery-content
         pw = 100vw
-        ph = pw * (905 / 1912)
+        ph = pw * (1024 / 1536)
         .display
           &.display-pc
             width: pw

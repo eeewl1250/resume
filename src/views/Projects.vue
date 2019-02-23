@@ -12,7 +12,18 @@
           @mouseleave="hoverLeave"
           @click="showProject(pIdx)"
       >
-        <div class="img"><img :src="project.img" width="100%"/></div>
+        <div class="img">
+          <img :src="imgPath + project.img + '_160.jpg'"
+               :srcset="imgPath + project.img + '_160.jpg 160w,'
+                      + imgPath + project.img + '_240.jpg 240w,'
+                      + imgPath + project.img + '_360.jpg 360w,'
+                      + imgPath + project.img + '_480.jpg 480w,'
+                      + imgPath + project.img + '_640.jpg 640w'"
+               sizes="(max-width: 640px) and (max-aspect-ratio: 1/1) 64vw,
+                      (min-aspect-ratio: 12/5) calc(65vh * (375 / 667)),
+                      16vw"
+          />
+        </div>
         <dl class="text">
           <dt class="no">0{{ pIdx + 1 }}</dt>
           <dd class="title">{{ project.title }}</dd>
@@ -43,7 +54,8 @@ export default {
   data () {
     return {
       hoverItemIndex: -1,
-      i: -1
+      i: -1,
+      imgPath: '/static/img/'
     }
   },
   methods: {
@@ -78,6 +90,7 @@ export default {
     .item
       position: relative
       top: 50%
+      left: 0
       display: inline-block
 
       width: w = 16vw
@@ -85,7 +98,7 @@ export default {
       margin: -(h/2) 0 0 8vw
 
       overflow: hidden
-      font-size: 18px
+      font-size: 0
       cursor: pointer
       transition: all 0.5s
       &:first-child
@@ -99,6 +112,7 @@ export default {
       .text
         margin-top: 8px
         height: 40px
+        font-size: 18px
         text-align: center
         transition: all 0.5s
         .no
@@ -210,6 +224,47 @@ export default {
         .img
           width: iw
           height: "calc(%s - 48px)" % ih
+        &.slide-in
+          animation: slide-in 2s
+          @keyframes slide-in
+            0%
+              left: 0
+              width: 0
+              opacity: 0
+            80%
+              left: 0
+              width: iw
+              opacity: 1
+          &:nth-child(2)
+            animation: slide-in-2 2s
+            @keyframes slide-in-2
+              0%
+                left: -10vw
+                width: 0
+                opacity: 0
+              10%
+                left: -10vw
+                width: 0
+                opacity: 0
+              90%
+                left: 0
+                width: iw
+                opacity: 1
+          &:nth-child(3)
+            animation: slide-in-3 2s
+            @keyframes slide-in-3
+              0%
+                left: -20vw
+                width: 0
+                opacity: 0
+              20%
+                left: -20vw
+                width: 0
+                opacity: 0
+              100%
+                left: 0
+                width: iw
+                opacity: 1
         &.hovering
           .img
             height: ih

@@ -65,11 +65,6 @@ export default {
     checkContentHeight () {
       const content = document.getElementsByClassName('experience-content')[0]
       this.$emit('overheight', content.scrollHeight > content.clientHeight)
-      // if (content.scrollHeight > content.clientHeight) {
-      //   this.$emit('overheight', true)
-      // } else {
-      //   this.$emit('overheight', false)
-      // }
     },
     checkScrollEnd (e) {
       const el = e.target
