@@ -32,10 +32,10 @@ export default {
   },
   data () {
     return {
-      imgPath: process.env.NODE_ENV === 'production'
-          ? '/resume/'
-          : '/'
-          + 'static/img/'
+      imgPath: (process.env.NODE_ENV === 'production'
+                ? '/resume/'
+                : '/')
+              + 'static/img/'
     }
   },
   components: {

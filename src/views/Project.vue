@@ -115,10 +115,10 @@ export default {
         MOBILE: 'mobile',
         PC: 'pc'
       },
-      imgPath: process.env.NODE_ENV === 'production'
-             ? '/resume/'
-             : '/'
-             + 'static/img/'
+      imgPath: (process.env.NODE_ENV === 'production'
+          ? '/resume/'
+          : '/')
+      + 'static/img/'
     }
   },
   computed: {
