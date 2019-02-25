@@ -141,8 +141,8 @@ export default {
               ]
             },
             info: {
-              demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
-              github: 'https://github.com/eeewl1250/elm-vue'
+              demo: 'http://eeewl1250.gitee.io/resume/',
+              github: 'https://github.com/eeewl1250/resume'
             }
           },
           {
@@ -165,8 +165,8 @@ export default {
               ]
             },
             info: {
-              demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
-              github: 'https://github.com/eeewl1250/elm-vue'
+              demo: 'http://eeewl1250.gitee.io/resume/',
+              github: 'https://github.com/eeewl1250/resume'
             }
           },
           {
@@ -193,8 +193,8 @@ export default {
               ]
             },
             info: {
-              demo: 'http://eeewl1250.gitee.io/eleme/#/goods',
-              github: 'https://github.com/eeewl1250/elm-vue'
+              demo: 'http://eeewl1250.gitee.io/resume/',
+              github: 'https://github.com/eeewl1250/resume'
             }
           }
         ],
