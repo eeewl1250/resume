@@ -52,12 +52,13 @@
                :href="pic.pic"
                target="_blank"
             >
-              <img :src="imgPath + pic.pic + '_720.jpg'"
-                   :srcset="imgPath + pic.pic + '_720.jpg 720w,'
+              <img :src="imgPath + pic.pic + '_480.jpg'"
+                   :srcset="imgPath + pic.pic + '_480.jpg 480w,'
+                          + imgPath + pic.pic + '_720.jpg 720w,'
                           + imgPath + pic.pic + '_960.jpg 960w,'
                           + imgPath + pic.pic + '_1280.jpg 1280w,'
-                          + imgPath + pic.pic + '_1440.jpg 1440w,'
                           + imgPath + pic.pic + '_1536.jpg 1536w,'
+                          + imgPath + pic.pic + '_1728.jpg 1728w,'
                           + imgPath + pic.pic + '_1920.jpg 1920w'"
                    sizes="(max-aspect-ratio: 1/1) calc(100vw - 2px),
                           (min-aspect-ratio: 8/5) calc(60vw - 2px),
@@ -224,7 +225,7 @@ export default {
       mw = mh * (375 / 667)
       /* PC端项目图尺寸 */
       pw = 70vw
-      ph = pw * (1024 / 1536)
+      ph = pw * (720 / 1536)
       .pic-nav
         position: relative
         margin-top: -3vh
@@ -389,7 +390,7 @@ export default {
     .gallery
       .gallery-content
         pw = 60vw
-        ph = pw * (1024 / 1536)
+        ph = pw * (720 / 1536)
         .display
           &.display-pc
             width: pw
@@ -404,7 +405,7 @@ export default {
     .gallery
       .gallery-content
         pw = 45vw
-        ph = pw * (1024 / 1536)
+        ph = pw * (720 / 1536)
         .display
           &.display-pc
             width: pw
@@ -419,7 +420,7 @@ export default {
     .gallery
       .gallery-content
         pw = 100vw
-        ph = pw * (1024 / 1536)
+        ph = pw * (720 / 1536)
         .display
           &.display-pc
             width: pw
