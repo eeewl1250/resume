@@ -29,7 +29,7 @@
             <a class="display-item"
                v-for="pic in galleryPics(picTypes.MOBILE).filter((v, i) => i === showedItemIdx)"
                :key="pic.id"
-               :href="pic.pic"
+               :href="imgPath + pic.pic + '_938.jpg'"
                target="_blank"
             >
               <img :src="imgPath + pic.pic + '_480.jpg'"
@@ -49,7 +49,7 @@
             <a class="display-item"
                v-for="pic in galleryPics(picTypes.PC).filter((v, i) => i === showedItemIdx)"
                :key="pic.id"
-               :href="pic.pic"
+               :href="imgPath + pic.pic + '_1920.jpg'"
                target="_blank"
             >
               <img :src="imgPath + pic.pic + '_480.jpg'"
