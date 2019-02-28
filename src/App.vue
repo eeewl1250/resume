@@ -1,17 +1,19 @@
 <template>
   <div id="app"
-       @wheel="changeMenu"
+       ref="app"
        @touchstart="touchStart"
        @touchend="touchEnd"
   >
     <transition-group :name="menuSlide" tag="div" class="main">
       <projects :projects="resumeData.projects"
+                :has-sizes="hasSizes"
                 key="projects"
                 :slideIn="slideIn"
                 v-if="selectedMenu===0"
                 @show-project="showProject"
       ></projects>
       <introduction :intro="resumeData.intro"
+                    :has-sizes="hasSizes"
                     key="introduction"
                     v-if="selectedMenu===1"
       ></introduction>
@@ -33,6 +35,7 @@
               @go-to-page="goToPage"
     ></v-header>
     <project :projects="resumeData.projects"
+             :has-sizes="hasSizes"
              :isProjectShowed="isProjectShowed"
              :project-index="projectIndex"
              @hide-project="hideProject"
@@ -235,7 +238,8 @@ export default {
           email: 'abc123qwer87@163.com',
           website: 'github.com/eeewl1250'
         }
-      }
+      },
+      hasSizes: true
     }
   },
   mounted () {
@@ -256,6 +260,11 @@ export default {
           }, 400)
         }
       }
+      // 兼容不支持img的srcset和sizes属性的浏览器
+      this.hasSizes = 'sizes' in document.createElement('img')
+      // 监听滚轮事件
+      this.$util.initWheelListener(window, document)
+      window.addWheelListener(this.$refs.app, this.changeMenu)
     })
   },
   components: {
@@ -274,9 +283,9 @@ export default {
     },
     touchEnd (evt) {
       const changedTouch = evt.changedTouches[0]
-      const distanceY = changedTouch.pageY - this.touchY
+      const distanceY = this.touchY - changedTouch.pageY
       if (Math.abs(distanceY) < 50) return
-      this.changeMenu({ wheelDelta: distanceY })
+      this.changeMenu({ deltaY: distanceY })
     },
     changeMenu (e) {
       // project页面出现时，禁止底层滚动
@@ -293,8 +302,8 @@ export default {
       //  切换menu
       this.isScrolled = true
       const len = this.resumeData.menu.length
-      this.selectedMenu = (this.selectedMenu + (e.wheelDelta > 0 ? -1 : 1) + len) % len
-      this.menuSlide = e.wheelDelta > 0 ? 'slide-down' : 'slide-up'
+      this.selectedMenu = (this.selectedMenu + (e.deltaY < 0 ? -1 : 1) + len) % len
+      this.menuSlide = e.deltaY < 0 ? 'slide-down' : 'slide-up'
 
       // 1s内滚动只生效一次
       setTimeout(() => {

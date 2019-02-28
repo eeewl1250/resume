@@ -13,7 +13,8 @@
           @click="showProject(pIdx)"
       >
         <div class="img">
-          <img :src="imgPath + project.img + '_160.jpg'"
+          <img v-if="hasSizes"
+               :src="imgPath + project.img + '_160.jpg'"
                :srcset="imgPath + project.img + '_160.jpg 160w,'
                       + imgPath + project.img + '_240.jpg 240w,'
                       + imgPath + project.img + '_360.jpg 360w,'
@@ -22,6 +23,12 @@
                sizes="(max-width: 640px) and (max-aspect-ratio: 1/1) 64vw,
                       (min-aspect-ratio: 12/5) calc(65vh * (375 / 667)),
                       16vw"
+               :alt="project.title + '封面'"
+          />
+          <img v-if="!hasSizes"
+               :class="{ 'size-control': !hasSizes }"
+               :src="imgPath + project.img + '_360.jpg'"
+               :alt="project.title + '封面'"
           />
         </div>
         <dl class="text">
@@ -49,6 +56,10 @@ export default {
     },
     projects: {
       type: Array
+    },
+    hasSizes: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -112,6 +123,10 @@ export default {
         height: "calc(%s - 48px)" % h
         overflow: hidden
         transition: all 0.5s
+        img
+          &.size-control
+            width: w
+            height: h
       .text
         margin-top: 8px
         height: 40px
@@ -193,6 +208,10 @@ export default {
         .img
           width: mw
           height: 10vh
+          img
+            &.size-control
+              width: mw
+              height: mh
         .text
           text-align: left
           .no
@@ -227,6 +246,10 @@ export default {
         .img
           width: iw
           height: "calc(%s - 48px)" % ih
+          img
+            &.size-control
+              width: iw
+              height: ih
         &.slide-in
           animation: slide-in 2s
           @keyframes slide-in

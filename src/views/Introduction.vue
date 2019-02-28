@@ -8,12 +8,19 @@
       </div>
     </div>
     <div class="avatar">
-      <img :src="`${imgPath}avatar_320.jpg`"
+      <img v-if="hasSizes"
+           :src="`${imgPath}avatar_320.jpg`"
            :srcset="`${imgPath}avatar_320.jpg 320w,
                      ${imgPath}avatar_480.jpg 480w,
                      ${imgPath}avatar_640.jpg 640w,
                      ${imgPath}avatar_700.jpg 700w`"
            sizes="(max-aspect-ratio: 1/1) calc(35vh * 700 / 906), 25vw"
+           alt="我的照片"
+      />
+      <img v-if="!hasSizes"
+           :class="{ 'size-control': !hasSizes }"
+           :src="`${imgPath}avatar_480.jpg`"
+           alt="我的照片"
       />
     </div>
     <scroll-down></scroll-down>
@@ -28,6 +35,10 @@ export default {
   props: {
     intro: {
       type: Object
+    },
+    hasSizes: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -87,6 +98,9 @@ export default {
     line-height: 100vh
     img
       vertical-align: middle
+      &.size-control
+        width: 25vw
+        height: calc(25vw * 906 / 700)
 
 @media only screen and (max-aspect-ratio: 1/1)
   .introduction
@@ -118,4 +132,8 @@ export default {
       margin-top: -25vh
       background: none
       line-height: 35vh
+      img
+        &.size-control
+          width: calc(35vh * 700 / 906)
+          height: 35vh
 </style>

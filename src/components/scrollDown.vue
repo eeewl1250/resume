@@ -2,10 +2,10 @@
   <div class="scroll-down-icon">
     <div class="text">上下滚动切换页面</div>
     <div class="arrow">
-      <img src="../assets/down.png" width="16" />
+      <img src="../assets/down.png" width="16" height="16" alt="下箭头" />
     </div>
     <div class="arrow">
-      <img src="../assets/down.png" width="16" />
+      <img src="../assets/down.png" width="16" height="16" alt="下箭头" />
     </div>
   </div>
 </template>
@@ -56,7 +56,7 @@ export default {
       24%
         opacity: 0
       40%
-        opaccity: 1
+        opacity: 1
       79%
         opacity: 1
       95%

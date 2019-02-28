@@ -68,6 +68,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 .c-header
   position: fixed
+  z-index: 1
   padding-top: 6vh
   width: 100vw
   height: 9vh

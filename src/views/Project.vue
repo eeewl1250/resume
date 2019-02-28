@@ -32,12 +32,19 @@
                :href="imgPath + pic.pic + '_938.jpg'"
                target="_blank"
             >
-              <img :src="imgPath + pic.pic + '_480.jpg'"
+              <img v-if="hasSizes"
+                   :src="imgPath + pic.pic + '_480.jpg'"
                    :srcset="imgPath + pic.pic + '_480.jpg 480w,'
                           + imgPath + pic.pic + '_640.jpg 640w,'
                           + imgPath + pic.pic + '_720.jpg 720w,'
                           + imgPath + pic.pic + '_938.jpg 938w'"
                    sizes="calc(70vh * 375 / 667 - 2px)"
+                   :alt="projects[projectIndex].title + '移动端图片'"
+              />
+              <img  v-if="!hasSizes"
+                    :src="imgPath + pic.pic + '_480.jpg'"
+                    :class="{ 'size-control': !hasSizes }"
+                    :alt="projects[projectIndex].title + '移动端图片'"
               />
             </a>
           </transition-group>
@@ -52,7 +59,8 @@
                :href="imgPath + pic.pic + '_1920.jpg'"
                target="_blank"
             >
-              <img :src="imgPath + pic.pic + '_480.jpg'"
+              <img v-if="hasSizes"
+                   :src="imgPath + pic.pic + '_480.jpg'"
                    :srcset="imgPath + pic.pic + '_480.jpg 480w,'
                           + imgPath + pic.pic + '_720.jpg 720w,'
                           + imgPath + pic.pic + '_960.jpg 960w,'
@@ -64,6 +72,12 @@
                           (min-aspect-ratio: 8/5) calc(60vw - 2px),
                           (min-aspect-ratio: 12/5) calc(45vw - 2px),
                           calc(70vw - 2px)"
+                   :alt="projects[projectIndex].title + 'PC端图片'"
+              />
+              <img  v-if="!hasSizes"
+                    :src="imgPath + pic.pic + '_720.jpg'"
+                    :class="{ 'size-control': !hasSizes }"
+                    :alt="projects[projectIndex].title + 'PC端图片'"
               />
             </a>
           </transition-group>
@@ -104,6 +118,10 @@ export default {
     },
     projects: {
       type: Array
+    },
+    hasSizes: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -178,6 +196,7 @@ export default {
 <style  lang="stylus" rel="stylesheet/stylus">
 .project-detail
   position: fixed
+  z-index: 2
   left: 0
   right: 0
   top: 0
@@ -252,10 +271,20 @@ export default {
           width: mw
           height: mh
           margin-top: (- mh / 2)
+          .display-item
+            img
+              &.size-control
+                width: "calc(%s - 2px)" % mw
+                height: "calc(%s - 2px)" % mh
         &.display-pc
           width: pw
           height: ph
           margin-top: (- ph / 2)
+          .display-item
+            img
+              &.size-control
+                width: "calc(%s - 2px)" % pw
+                height: "calc(%s - 2px)" % ph
         .display-item
           position: absolute
           left: 0
@@ -396,6 +425,11 @@ export default {
             width: pw
             height: ph
             margin-top: (- ph / 2)
+            .display-item
+              img
+                &.size-control
+                  width: "calc(%s - 2px)" % pw
+                  height: "calc(%s - 2px)" % ph
         .controls
           &.pc-pic
             top: "calc(50% + %s / 2 + 20px)" % ph
@@ -411,6 +445,11 @@ export default {
             width: pw
             height: ph
             margin-top: (- ph / 2)
+            .display-item
+              img
+                &.size-control
+                  width: "calc(%s - 2px)" % pw
+                  height: "calc(%s - 2px)" % ph
         .controls
           &.pc-pic
             top: "calc(50% + %s / 2 + 15px)" % ph
@@ -426,6 +465,11 @@ export default {
             width: pw
             height: ph
             margin-top: (- ph / 2)
+            .display-item
+              img
+                &.size-control
+                  width: "calc(%s - 2px)" % pw
+                  height: "calc(%s - 2px)" % ph
         .controls
           &.pc-pic
             top: "calc(50% + %s / 2 + 30px)" % ph
