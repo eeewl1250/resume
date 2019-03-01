@@ -10,3 +10,4 @@
 ## Resume
 - 项目地址：[github](https://github.com/eeewl1250/resume)
 - 演示地址：[地址一](http://eeewl1250.gitee.io/resume)， [地址二](https://eeewl1250.github.io/resume/)
+- 参考网站：[Humbert & Poyet](https://humbertpoyet.com)
